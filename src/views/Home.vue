@@ -8,7 +8,9 @@
                 <nav-bar></nav-bar>
             </div>
             <div class="content-wrapper">
-                <router-view></router-view>
+                <el-card class="box-card">
+                    <router-view></router-view>
+                </el-card>
             </div>
         </div>
     </div>
@@ -42,5 +44,6 @@ export default {
     .right-wrapper
         width 100%
         .content-wrapper
-            height 100%
+            margin-top 10px
+            margin-left 10px
 </style>

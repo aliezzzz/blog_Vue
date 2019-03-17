@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import Index from './views/Index'
+import Home from '../views/Home.vue'
+import Index from '../views/index/Index'
+import Date from '../views/date/Date'
+import Category from  '../views/category/Category'
 
 Vue.use(Router);
 
@@ -24,12 +26,12 @@ export default new Router({
 				{
 					path: 'date',
 					name: 'date',
-					component: Index
+					component: Date
 				},
 				{
 					path: 'category',
 					name: 'category',
-					component: Index
+					component: Category
 				}
 			]
 		}
