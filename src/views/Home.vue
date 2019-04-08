@@ -31,18 +31,14 @@ export default {
 <style lang="stylus">
 .home
     display flex
+    align-items flex-start
     height 100%
     .left-wrapper
         flex 0 0 300px
         z-index 100
         height 100%
-        box-shadow 0 0 13px 0.5px #444c55
-        background url("../assets/sidebar-bg.jpg")
-        background-size cover
-        background-repeat no-repeat
-        background-position-x center
     .right-wrapper
-        width 100%
+        flex 1 1 auto
         .content-wrapper
             margin-top 10px
             margin-left 10px

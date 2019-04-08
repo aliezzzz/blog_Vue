@@ -5,6 +5,11 @@ import Index from '../views/index/Index'
 import Date from '../views/date/Date'
 import Category from  '../views/category/Category'
 
+import articleIndex from '../views/article/index'
+
+import register from '../views/login/Register'
+import login from '../views/login/Login'
+
 Vue.use(Router);
 
 export default new Router({
@@ -19,6 +24,16 @@ export default new Router({
 			component: Home,
 			children: [
 				{
+					path: 'register',
+					name: 'register',
+					component: register
+				},
+				{
+					path: 'login',
+					name: 'login',
+					component: login
+				},
+				{
 					path: 'index',
 					name: 'index',
 					component: Index
@@ -32,6 +47,12 @@ export default new Router({
 					path: 'category',
 					name: 'category',
 					component: Category
+				},
+				{
+					path: 'index/article-page/:id',
+					name: 'artilce-page',
+					component: articleIndex,
+					props: true
 				}
 			]
 		}

@@ -13,13 +13,14 @@
 			</el-input>
 		</div>
 		<div class="nav-right">
-			<el-dropdown>
+			<el-button v-if="getIsLogin" size="small" class="nav-btn" @click="logout">退出</el-button>
+			<el-dropdown v-else>
 				<el-button type="primary" size="small" class="nav-btn">
 					登录<i class="el-icon-arrow-down el-icon--right"></i>
 				</el-button>
 				<el-dropdown-menu slot="dropdown">
-					<el-dropdown-item>登录</el-dropdown-item>
-					<el-dropdown-item>退出</el-dropdown-item>
+					<el-dropdown-item @click.native="goLogin">登录</el-dropdown-item>
+					<el-dropdown-item @click.native="goRegister">注册</el-dropdown-item>
 				</el-dropdown-menu>
 			</el-dropdown>
 		</div>
@@ -27,10 +28,12 @@
 </template>
 
 <script>
+import {mapGetters, mapMutations} from 'vuex'
 	export default {
 		name: "NavBar",
 		data () {
 			return{
+				token: sessionStorage.getItem('token'),
 				searchCond: '',
 				navItem:[{
 					title: '首页',
@@ -47,10 +50,26 @@
 				}]
 			}
 		},
+		computed:{
+			...mapGetters(['getIsLogin']),
+		},
 		methods:{
+			...mapMutations(['setLogin']),
+			logout(){
+				sessionStorage.removeItem('token');
+				this.setLogin(false);
+				this.$message.success('已退出登录')
+			},
 			navTo(index){
 				this.$router.push(index);
-			}
+			},
+			goRegister(){
+				console.log('test');
+				this.$router.push('/register')
+			},
+			goLogin(){
+				this.$router.push('/login')
+			},
 		}
 	}
 </script>

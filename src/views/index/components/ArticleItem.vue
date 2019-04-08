@@ -1,6 +1,6 @@
 <template>
 	<div class="articleitem-wrapper" :class="{'mouseover': mouseover}" @mouseover="mouseover=true" @mouseleave="mouseover=false" ref="article">
-		<div class="header">
+		<div class="header" @click="toArticlePage">
 			<span class="title use-font">{{article.title}}</span>
 			<div class="time-wrapper">
 				<span class="time-prefix">创建时间：</span>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import * as api from '@/api/articles.js'
 	export default {
 		name: "ArticleItem",
 		props:{
@@ -35,6 +36,9 @@
 		methods:{
 			formatDate(date){
 				return date.slice(0,10)
+			},
+			toArticlePage(){
+				this.$router.push({name: 'artilce-page', params: {id: this.article.id}})
 			}
 		},
 		created(){
@@ -47,7 +51,6 @@
 		box-shadow 0px 10px 30px 1px #e9e9e9
 		margin-top 10px
 		transition ease .5s
-
 	}
 	.articleitem-wrapper{
 		width 100%
@@ -58,6 +61,7 @@
 		border-radius 5px
 		.header{
 			height 40px
+			cursor pointer
 			display flex
 			justify-content space-between
 			.title{

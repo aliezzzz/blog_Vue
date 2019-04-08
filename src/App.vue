@@ -16,5 +16,10 @@ body {
     margin 0 auto
     width 1200px
     height 100%
+    .btn{
+      border-color white
+      color white
+      background-color #95BFAD
+    }
   }
 </style>

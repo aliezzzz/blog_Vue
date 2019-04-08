@@ -3,7 +3,14 @@ import request from '../utils/request'
 export const getArticlesList = filter =>
 		request({
 			method: 'get',
-			url: '/articles/' + '?time=' + filter,
+			// url: '/articles/?ordering=-add_time',
+			url: '/articles/?ordering=-add_time&search=' + filter,
+		})
+
+export const getArticlesItem = id =>
+		request({
+			method: 'get',
+			url: '/articles/' + id
 		})
 
 export const getCategory = data =>
