@@ -25,13 +25,6 @@
         <div class="footer">
             <el-button @click="_nextPage('prev')" :disabled="prevDisabled" size="mini">上一页</el-button>
             <el-button @click="_nextPage('next')" :disabled="nextDisabled" size="mini">下一页</el-button>
-            <!-- <el-pagination
-                    background
-                    @current-change="_handleCurrentChange"
-                    layout="prev, pager, next"
-                    :total="totalNum"
-                    :page-size="pageSize">
-            </el-pagination> -->
         </div>
 	</div>
 </template>

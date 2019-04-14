@@ -8,8 +8,8 @@
 			</ul>
 		</div>
 		<div class="nav-mid">
-			<el-input class="nav-input" size="small" v-model="searchCond" placeholder="请输入关键词搜索">
-				<el-button class="nav-btn" slot="append" icon="el-icon-search" size="mini"></el-button>
+			<el-input class="nav-input" size="small" v-model="searchCond" placeholder="请输入关键词搜索" clearable @clear="clearSearch">
+				<el-button class="nav-btn" slot="append" icon="el-icon-search" size="mini" @click="searchArticles"></el-button>
 			</el-input>
 		</div>
 		<div class="nav-right">
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import {mapGetters, mapMutations} from 'vuex'
+import {mapGetters, mapMutations, mapActions} from 'vuex'
 	export default {
 		name: "NavBar",
 		data () {
@@ -46,22 +46,30 @@ import {mapGetters, mapMutations} from 'vuex'
 					index: '/category',
 				},{
 					title: '订阅博客',
-					index: '',
+					index: '/rss',
 				}]
 			}
 		},
 		computed:{
 			...mapGetters(['getIsLogin']),
 		},
+		created(){
+			this.searchArticle('');
+		},
 		methods:{
 			...mapMutations(['setLogin']),
+			...mapActions(['searchArticle']),
 			logout(){
 				sessionStorage.removeItem('token');
 				this.setLogin(false);
 				this.$message.success('已退出登录')
 			},
 			navTo(index){
-				this.$router.push(index);
+				if (index !== '/rss'){
+					this.$router.push(index);
+				}else{
+					window.open('http://127.0.0.1:8000' + index)
+				}
 			},
 			goRegister(){
 				console.log('test');
@@ -70,6 +78,21 @@ import {mapGetters, mapMutations} from 'vuex'
 			goLogin(){
 				this.$router.push('/login')
 			},
+
+			searchArticles(){
+				this.searchArticle(this.searchCond);
+				console.log(this.$route);
+				if (this.$route.path !== '/index'){
+					this.$router.push('/index')
+				}
+			},
+			clearSearch() {
+				this.searchCond = '';
+				this.searchArticle(this.searchCond);
+				if (this.$route.path !== '/index'){
+					this.$router.push('/index')
+				}
+			}
 		}
 	}
 </script>

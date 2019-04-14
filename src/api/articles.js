@@ -7,6 +7,25 @@ export const getArticlesList = filter =>
 			url: '/articles/?ordering=-add_time&search=' + filter,
 		})
 
+export const nextPage = page =>
+        request({
+            method: 'get',
+            url: page
+        })
+
+export const getArticlesListByCate = category =>
+		request({
+			method: 'get',
+			url: '/articles/?ordering=-add_time&category=' + category,
+		})
+
+export const getArticlesListByTime = time =>
+		request({
+			method: 'get',
+			url: '/articles/?ordering=-add_time&time=' + time,
+		})
+		
+
 export const getArticlesItem = id =>
 		request({
 			method: 'get',
@@ -26,4 +45,10 @@ export const archiveDate = data =>
 			method: 'get',
 			url: '/archive/',
 			data
+		})
+
+export const rss = () =>
+		request({
+			method: 'get',
+			url: '/rss/'
 		})

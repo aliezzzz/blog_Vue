@@ -1,19 +1,22 @@
 <template>
 	<div class="index">
+		<div class="no-content" v-if="!articleList.length">没有搜索到内容</div>
 		<article-item 
-			@click="toArticlePage"
 			class="article"
 			v-for="article in articleList"
 			:key="article.id"
 			:article="article">
 		</article-item>
+		<div class="footer">
+            <el-button @click="_nextPage('prev')" :disabled="prevDisabled" size="mini">上一页</el-button>
+            <el-button @click="_nextPage('next')" :disabled="nextDisabled" size="mini">下一页</el-button>
+        </div>
 	</div>
 </template>
 
 <script>
 	import articleItem from "./components/ArticleItem"
-	import * as api from "../../api/articles"
-	import {mapState, mapMutations} from 'vuex'
+	import {mapState, mapMutations, mapActions} from 'vuex'
 	export default {
 		name: "Index",
 		data(){
@@ -21,27 +24,33 @@
 			}
 		},
 		computed: {
-			...mapState(['articleList', 'prev', 'next'])
+			...mapState(['articleList', 'prev', 'next']),
+			nextDisabled(){
+                if(this.next !== null){
+                    return false
+                }else{
+                    return true
+                }
+            },
+            prevDisabled(){
+                if(this.prev !== null){
+                    return false
+                }else{
+                    return true
+                }
+            }
 		},
 		methods:{
-			...mapMutations(['setArticle']),
-			getArticleList(){
-				api.getArticlesList('')
-					.then(res =>{
-						console.log(res);
-						this.setArticle(res);
-					})
-			},
-			toArticlePage(){
-				console.log('123');
-				// api.getArticlesItem(id)
-				// 	.then(res => {
-				// 		console.log(res);
-				// 	})
-			}
-		},
-		created(){
-			this.getArticleList();
+			...mapActions(['nextArticlesPage']),
+			_nextPage(type){
+                let url = ''
+                if(type=== 'next'){
+                    url = this.next;
+                }else{
+                    url = this.prev;
+				}
+                this.nextArticlesPage(url)
+            },
 		},
 		components:{
 			articleItem
@@ -50,7 +59,14 @@
 </script>
 
 <style lang="stylus" scoped>
-	.article{
-		margin-top 5px
+	.no-content{
+		text-align: center;
+		font-size: 18px;
+		font-weight: bold;
+		color: #666;
+		padding: 40px;
+	}
+	.footer{
+		text-align center
 	}
 </style>

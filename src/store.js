@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import * as api from '@/api/articles.js'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -34,8 +36,32 @@ export default new Vuex.Store({
 		},
 		setLogin(state, type){
 			state.isLogin = type;
-		}
+		},
 	},
 	actions: {
+		nextArticlesPage({commit}, url){
+			api.nextPage(url)
+				.then( res => {
+					commit('setArticle', res)
+				})
+		},
+		searchArticle({state, commit}, cond){
+			api.getArticlesList(cond)
+				.then( res => {
+					commit('setArticle', res)
+				})
+		},
+		getArticleByCate({state, commit}, cate){
+			api.getArticlesListByCate(cate)
+				.then( res => {
+					commit('setArticle', res)
+				})
+		},
+		getArticleByTime({state, commit}, time){
+			api.getArticlesListByTime(time)
+				.then( res => {
+					commit('setArticle', res)
+				})
+		}
 	}
 })
