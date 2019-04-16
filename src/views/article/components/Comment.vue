@@ -11,7 +11,7 @@
             </div>
             <div class="input-right">
                 <div class="btn-wrapper">
-                    <div class="input-btn" @click="comment">评论</div>
+                    <div class="input-btn" @click="comment">评论<i class="icon-btn iconfont icon-comment"></i></div>
                 </div>
             </div>
         </div>
@@ -27,13 +27,15 @@ export default {
     },
     methods:{
         comment(){
-            console.log('231');
             const text = this.$refs.inputP.textContent;
             console.log(text);
             this.$emit('comment', text);
             this.$refs.inputP.textContent = '';
             this.inputValue = '';
         }
+    },
+    mounted(){
+        this.$refs.inputP.textContent = ''
     }
 
 }
@@ -77,7 +79,7 @@ export default {
             margin-left: -20px;
             .btn-wrapper{
                 height 100%
-                width 85px
+                width 86px
                 background-color #fff
                 display:flex;
                 align-items:center;
@@ -91,6 +93,9 @@ export default {
                     color: #009FEB;
                     font-weight: bold;
                     border-radius: 20px;
+                    .icon-btn{
+                        margin-left 3px
+                    }
                 }
             }
         }

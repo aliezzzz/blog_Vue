@@ -13,7 +13,8 @@ const sessionSet = (key, value) => {
 //service
 const service = axios.create({
 	// baseURL: 'process.env.VUE_APP_BASE_API', // api 的 base_url
-	baseURL: 'http://127.0.0.1:8000/',
+	baseURL: 'http://101.132.171.68/',
+	// baseURL: 'http://127.0.0.1:8000/',
 	timeout: 10000,
 })
 

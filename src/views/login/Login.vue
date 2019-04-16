@@ -44,6 +44,7 @@ export default {
                 if(value){
                     api.login(this.loginForm)
                         .then(res => {
+                            this.$message.success('登录成功');
                             sessionStorage.setItem('token', res.token);
                             this.setLogin(true);
                             this.$router.push('/index')

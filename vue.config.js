@@ -7,7 +7,7 @@ function resolve(dir) {
 
 module.exports = {
     productionSourceMap: false, //关闭production模式的sourcemap
-    publicPath: '/', //部署服务器根目录
+    publicPath: '/ui', //部署服务器根目录
     configureWebpack: {
         resolve: {
             extensions: ['.js', '.vue', '.json'],

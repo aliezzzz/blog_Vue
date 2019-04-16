@@ -3,7 +3,7 @@
 		<div class="nav-left">
 			<ul>
 				<li class="nav-item use-font" :class="{'active':$route.path === item.index}" v-for="(item,index) in navItem" :key="index" @click="navTo(item.index)">
-					<span class="nav-title">{{item.title}}</span>
+					<span class="nav-title"><i :class="'iconfont '+item.icon"></i>{{item.title}}</span>
 				</li>
 			</ul>
 		</div>
@@ -19,8 +19,8 @@
 					登录<i class="el-icon-arrow-down el-icon--right"></i>
 				</el-button>
 				<el-dropdown-menu slot="dropdown">
-					<el-dropdown-item @click.native="goLogin">登录</el-dropdown-item>
-					<el-dropdown-item @click.native="goRegister">注册</el-dropdown-item>
+					<el-dropdown-item @click.native="goLogin">登录<i class="icon iconfont icon-log-in"></i></el-dropdown-item>
+					<el-dropdown-item @click.native="goRegister">注册<i class="icon iconfont icon-zhuce"></i></el-dropdown-item>
 				</el-dropdown-menu>
 			</el-dropdown>
 		</div>
@@ -38,15 +38,19 @@ import {mapGetters, mapMutations, mapActions} from 'vuex'
 				navItem:[{
 					title: '首页',
 					index: '/index',
+					icon: 'icon-container'
 				},{
 					title: '日期归档',
 					index: '/date',
+					icon: 'icon-calendar1'
 				},{
 					title: '标签分类',
 					index: '/category',
+					icon: 'icon-filter'
 				},{
 					title: '订阅博客',
 					index: '/rss',
+					icon: 'icon-rss'
 				}]
 			}
 		},
@@ -66,9 +70,12 @@ import {mapGetters, mapMutations, mapActions} from 'vuex'
 			},
 			navTo(index){
 				if (index !== '/rss'){
+					if (index === '/index'){
+						this.searchArticle('');
+					}
 					this.$router.push(index);
 				}else{
-					window.open('http://127.0.0.1:8000' + index)
+					window.open('http://101.132.171.68' + index)
 				}
 			},
 			goRegister(){
@@ -98,6 +105,10 @@ import {mapGetters, mapMutations, mapActions} from 'vuex'
 </script>
 
 <style lang="stylus">
+	.icon{
+		margin-left: 10px;
+		color #6495ed
+	}
 	.nav-bar{
 		position relative
 		width 100%

@@ -1,7 +1,10 @@
 <template>
 	<div class="article-index">
         <div class="header">
-			<span class="title use-font">{{articleDetail.title}}</span>
+			<span class="title use-font">
+                <i class="icon-title iconfont icon-doubleleft" @click="backToIndex"></i>
+                <span class="content">{{articleDetail.title}}</span>   
+            </span>
 			<div class="time-wrapper">
 				<span class="time-prefix">创建时间：</span>
 				<span class="time">{{formatDate(articleDetail.add_time)}}</span>
@@ -79,13 +82,16 @@
             }
 		},
 		methods:{
+            backToIndex(){
+                this.$router.go(-1);
+            },
             formatDate(date){
                 if(date){
                     return date.slice(0,10)
                 }
             },
             _comment(text){
-                console.log(text);
+                console.log(text + '1');
                 if(text){
                     if(!this.getIsLogin){
                         this.$message.warning('游客没有评论权限')
@@ -146,16 +152,23 @@
 <style lang="stylus" scoped>
 .header{
     height 40px
-    cursor pointer
     display flex
     justify-content space-between
     .title{
-        padding-left 10px
         color #444
         font-size 25px
         line-height 40px
         font-weight bold
-        border-left 4px solid #679c76
+        .icon-title{
+            cursor pointer
+            color #3f9dff;
+            font-size 25px
+            line-height 40px
+        }
+        .content{
+            padding-left 10px
+            // border-left 4px solid #679c76
+        }
     }
     .time-wrapper{
         margin-top 25px

@@ -11,6 +11,7 @@
 			{{article.content}}
 		</div>
 		<div class="footer">
+			<i class="icon iconfont icon-tag"></i>
 			<span class="tag" v-if="article.cate_name.category">{{article.cate_name.category}}</span>
 			<span class="tag" v-if="article.cate_name.sub_category">{{article.cate_name.sub_category}}</span>
 			<div class="footer-right">
@@ -94,6 +95,12 @@ import * as api from '@/api/articles.js'
 		}
 		.footer{
 			margin-top 5px
+			.icon{
+				vertical-align: text-top;
+				font-size: 22px;
+				margin-right: 15px;
+				color cornflowerblue
+			}
 			.tag{
 				margin-right 5px
 				padding 2px 10px

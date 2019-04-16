@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex';
 import * as api from '@/api/login.js'
 export default {
     name: 'Register',
@@ -53,6 +54,7 @@ export default {
         }
     },
     methods:{
+        ...mapMutations(['setLogin']),
         getEmailCode(){
             api.getCode({
                 "email": this.registerForm.email
@@ -73,7 +75,11 @@ export default {
                     if(this.registerForm.password.length >= 6){
                         api.register(this.registerForm)
                             .then( res => {
-                                console.log(res)
+                                console.log(res);
+                                this.$message('注册成功')
+                                sessionStorage.setItem('token', res.token);
+                                this.setLogin(true);
+                                this.$router.push('/index');
                             })
                             .catch( res => {
                                 console.log(res);

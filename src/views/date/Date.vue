@@ -1,7 +1,7 @@
 <template>
 	<div class="date-wrapper">
-		<div class="year" v-for="(year, index) in dateList" :key="index" @click="nacToArticles(year)">
-			<div class="year-title">{{Object.keys(year)[0]}}</div>
+		<div class="year" v-for="(year, index) in dateList" :key="index">
+			<p class="year-title" @click="nacToArticles(Object.keys(year)[0])">{{Object.keys(year)[0]}}</p>
 			<div class="date-item" v-for="(item, index2) in year[Object.keys(year)[0]]" :key="index2" @click.stop="nacToArticles(item.date)">
 				<span class="date">{{item.date}}</span>
 				<span class="count">文章数量：{{item.count}}</span>
@@ -49,6 +49,7 @@ export default {
 			return formatList
 		},
 		nacToArticles(time){
+			console.log(time);
 			this.getArticleByTime(time);
 			this.$router.push('/index');
 		}
@@ -66,6 +67,8 @@ export default {
 	.date-wrapper{
 		.year{
 			.year-title{
+				cursor pointer
+				widows 100px
 				margin 5px 0
 				padding 5px 10px
 				font-size 20px
